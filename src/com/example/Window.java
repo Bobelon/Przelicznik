@@ -1,5 +1,8 @@
 package com.example;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -23,6 +26,7 @@ public class Window extends JFrame {
 			private int listY = 10;
 			private int listWidth = 400;
 			private int listHeight = 20;
+			private String mode = "DMS";
 			
 		private JTextField textField;
 			private int textFieldX = 10;
@@ -44,18 +48,37 @@ public class Window extends JFrame {
 			private int countButtonWidth = 400;
 			private int countButtonHeight = 20;
 			private String countButtonText = "Przelicz";
+
+	// Listenery
+		private ActionListener actionListener = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				switch(list.getSelectedIndex()) {
+					case 0:
+						mode = "DMS";
+						label.setText(mode);
+					break;
+					case 1:
+						mode = "GPS";
+						label.setText(mode);
+					break;
+				}
+			}			
+		};
 	
 	public Window() {
 		// Ustawianie parametrów okna
 			setBounds(windowX, windowY, windowWidth, windowHeight);
 			setTitle(windowName);
 			setLayout(null);
+			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			
 		// Dodanie listy
 			list = new JComboBox<String>();
-			list.addItem("Tryb 1");
-			list.addItem("Tryb 2");
+			list.addItem("DMS (stopnie : minuty : sekundy");
+			list.addItem("GPS (stopnie : minuty)");
 			list.setBounds(listX, listY, listWidth, listHeight);
+			list.addActionListener(actionListener);
 			add(list);
 			
 		// Dodanie pola do wpisywania liczby
