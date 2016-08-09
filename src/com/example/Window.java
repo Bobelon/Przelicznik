@@ -37,6 +37,13 @@ public class Window extends JFrame {
 			private int labelWidth = 400;
 			private int labelHeight = 20;
 			private String labelText = "Wynik";
+			
+		private JButton countButton;
+			private int countButtonX = 10;
+			private int countButtonY = 100;
+			private int countButtonWidth = 400;
+			private int countButtonHeight = 20;
+			private String countButtonText = "Przelicz";
 	
 	public Window() {
 		// Ustawianie parametrów okna
@@ -62,6 +69,13 @@ public class Window extends JFrame {
 			label.setBounds(labelX, labelY, labelWidth, labelHeight);
 			label.setText(labelText);
 			add(label);
+			
+		// Dodanie przycisku przeliczania
+			countButton = new JButton();
+			countButton.setBounds(countButtonX, countButtonY, countButtonWidth, countButtonHeight);
+			countButton.setText(countButtonText);
+			//countButton.addActionListener(null);
+			add(countButton);
 			
 		setVisible(true);
 	}
