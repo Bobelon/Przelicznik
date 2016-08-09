@@ -1,7 +1,10 @@
 package com.example;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class Window extends JFrame {
 	
@@ -20,6 +23,20 @@ public class Window extends JFrame {
 			private int listY = 10;
 			private int listWidth = 400;
 			private int listHeight = 20;
+			
+		private JTextField textField;
+			private int textFieldX = 10;
+			private int textFieldY = 40;
+			private int textFieldWidth = 400;
+			private int textFieldHeight = 20;
+			private String textFieldText = "Podaj wspó³rzêdne";
+			
+		private JLabel label;
+			private int labelX = 10;
+			private int labelY = 70;
+			private int labelWidth = 400;
+			private int labelHeight = 20;
+			private String labelText = "Wynik";
 	
 	public Window() {
 		// Ustawianie parametrów okna
@@ -33,6 +50,18 @@ public class Window extends JFrame {
 			list.addItem("Tryb 2");
 			list.setBounds(listX, listY, listWidth, listHeight);
 			add(list);
+			
+		// Dodanie pola do wpisywania liczby
+			textField = new JTextField();
+			textField.setBounds(textFieldX, textFieldY, textFieldWidth, textFieldHeight);
+			textField.setText(textFieldText);
+			add(textField);
+			
+		// Dodanie pola wyœwietlaj¹cego wynik
+			label = new JLabel();
+			label.setBounds(labelX, labelY, labelWidth, labelHeight);
+			label.setText(labelText);
+			add(label);
 			
 		setVisible(true);
 	}
