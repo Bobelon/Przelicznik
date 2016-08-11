@@ -31,7 +31,7 @@ public class Calculations {
 			return "Niew³aœciwy format danych";
 		}
 		
-		S = 0;
-		return "DMS = " + D + "* " + M + "' " + S + "\"";
+		S = (M - (int) M) * 60;
+		return "DMS = " + D + "* " + (int) M + "' " + S + "\"";
 	}
 }
