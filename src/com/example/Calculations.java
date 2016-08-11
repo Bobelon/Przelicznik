@@ -1,37 +1,25 @@
 package com.example;
 
-public class Calculations {
+public class Calculations  {
 	
-	public String dmsToDm(String degrees, String minutes, String seconds) {
+	public String dmsToDm(String degrees, String minutes, String seconds) throws NumberFormatException {
 		
-		float D, M, S;
-		
-		try {
-			D = Float.parseFloat(degrees);
-			M = Float.parseFloat(minutes);
-			S = Float.parseFloat(seconds);
-		}
-		catch(NumberFormatException e) {
-			return "Niew³aœciwy format danych";
-		}
-		
+		float D = Float.parseFloat(degrees);
+		float M = Float.parseFloat(minutes);
+		float S = Float.parseFloat(seconds);
+				
 		M += S / 60;
 		
 		return "DM = " + D + "* " + M + "'";
 	}
 	
-	public String dmToDms(String degrees, String minutes) {		
-		float D, M, S;
+	public String dmToDms(String degrees, String minutes) throws NumberFormatException {
 		
-		try {
-			D = Float.parseFloat(degrees);
-			M = Float.parseFloat(minutes);
-		}
-		catch(NumberFormatException e) {
-			return "Niew³aœciwy format danych";
-		}
+		float D = Float.parseFloat(degrees);
+		float M = Float.parseFloat(minutes);
 		
-		S = (M - (int) M) * 60;
+		float S = (M - (int) M) * 60;
+		
 		return "DMS = " + D + "* " + (int) M + "' " + S + "\"";
 	}
 }

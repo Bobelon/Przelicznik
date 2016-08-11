@@ -1,5 +1,7 @@
 package com.example;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -106,17 +108,34 @@ public class Window extends JFrame {
 		
 		private ActionListener buttonActionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == countButton) {
-					switch(mode) {
-						case "DMS":
-							labelText = calculate.dmsToDm(dmsDegrees.getText(), dmsMinutes.getText(), dmsSeconds.getText());
-						break;
-						case "DM":
-							labelText = calculate.dmToDms(dmsDegrees.getText(), dmsMinutes.getText());
-						break;
+				// Wyœwietlanie wyniku
+					if (e.getSource() == countButton) {
+						try {
+							switch(mode) {
+								case "DMS":
+									labelText = calculate.dmsToDm(dmsDegrees.getText(), dmsMinutes.getText(), dmsSeconds.getText());
+								break;
+								case "DM":
+									labelText = calculate.dmToDms(dmsDegrees.getText(), dmsMinutes.getText());
+								break;
+							}
+							
+							// Upewnienie siê, ¿e tekst nie jest wyœwietlany z ustawieniami komunikatu o b³êdzie
+								if(label.getForeground() == Color.RED) {
+									label.setForeground(Color.BLACK);
+									label.setFont(new Font(label.getFont().getName(), Font.PLAIN, label.getFont().getSize()));
+								}
+						}
+						catch (NumberFormatException exception) {
+							// Komunikat o b³êdzie - pogrubienie i zmiana koloru tekstu
+								Font normal = label.getFont();
+								Font error = new Font(normal.getName(), Font.BOLD, normal.getSize());
+								label.setForeground(Color.RED);
+								label.setFont(error);
+								labelText = "Niew³aœciwy format danych";
+						}
+						label.setText(labelText);
 					}
-					label.setText(labelText);
-				}
 			}
 		};
 		
