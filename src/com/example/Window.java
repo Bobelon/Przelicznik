@@ -88,7 +88,6 @@ public class Window extends JFrame {
 				switch(list.getSelectedIndex()) {
 					case 0:
 						mode = "DMS";
-						label.setText(mode);
 						dmsSeconds.setEnabled(true);
 						dmsSecondsCharacter.setEnabled(true);
 						dmsSeconds.setVisible(true);
@@ -96,7 +95,6 @@ public class Window extends JFrame {
 					break;
 					case 1:
 						mode = "DM";
-						label.setText(mode);
 						dmsSeconds.setEnabled(false);
 						dmsSecondsCharacter.setEnabled(false);
 						dmsSeconds.setVisible(false);
@@ -115,7 +113,7 @@ public class Window extends JFrame {
 			
 		// Dodanie listy
 			list = new JComboBox<String>();
-			list.addItem("DMS (stopnie : minuty : sekundy");
+			list.addItem("DMS (stopnie : minuty : sekundy)");
 			list.addItem("DM (stopnie : minuty)");
 			list.setBounds(listX, listY, listWidth, listHeight);
 			list.addActionListener(actionListener);
