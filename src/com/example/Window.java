@@ -82,7 +82,7 @@ public class Window extends JFrame {
 			private String countButtonText = "Przelicz";
 
 	// Listenery
-		private ActionListener actionListener = new ActionListener() {
+		private ActionListener listActionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				switch(list.getSelectedIndex()) {
@@ -103,6 +103,25 @@ public class Window extends JFrame {
 				}
 			}			
 		};
+		
+		private ActionListener buttonActionListener = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == countButton) {
+					switch(mode) {
+						case "DMS":
+							labelText = calculate.dmsToDm(dmsDegrees.getText(), dmsMinutes.getText(), dmsSeconds.getText());
+						break;
+						case "DM":
+							labelText = calculate.dmToDms(dmsDegrees.getText(), dmsMinutes.getText());
+						break;
+					}
+					label.setText(labelText);
+				}
+			}
+		};
+		
+	// Inne
+		private Calculations calculate = new Calculations();
 	
 	public Window() {
 		// Ustawianie parametrów okna
@@ -116,7 +135,7 @@ public class Window extends JFrame {
 			list.addItem("DMS (stopnie : minuty : sekundy)");
 			list.addItem("DM (stopnie : minuty)");
 			list.setBounds(listX, listY, listWidth, listHeight);
-			list.addActionListener(actionListener);
+			list.addActionListener(listActionListener);
 			add(list);
 			
 		// Dodanie pola do wpisywania liczby			
@@ -156,7 +175,7 @@ public class Window extends JFrame {
 			countButton = new JButton();
 			countButton.setBounds(countButtonX, countButtonY, countButtonWidth, countButtonHeight);
 			countButton.setText(countButtonText);
-			//countButton.addActionListener(null);
+			countButton.addActionListener(buttonActionListener);
 			add(countButton);
 			
 		setVisible(true);
