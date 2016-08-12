@@ -30,6 +30,7 @@ public class Window extends JFrame {
 		private int marginTopBottom;
 		private int elementWidth;
 		private int elementHeight;
+		private Font elementFont;
 		
 	// Elementy okna
 		private JComboBox<String> list;
@@ -90,7 +91,7 @@ public class Window extends JFrame {
 			private int countButtonY = 100;
 			private int countButtonWidth = 400;
 			private int countButtonHeight = 20;
-			private String countButtonText = "JPrzelicz";
+			private String countButtonText = "Przelicz";
 
 	// Listenery
 		private ActionListener listActionListener = new ActionListener() {
@@ -173,10 +174,12 @@ public class Window extends JFrame {
 			marginTopBottom = (int) (contentHeight * 0.05);
 			elementWidth = contentWidth - (2 * marginLeftRight);
 			elementHeight = (int) ((contentHeight - (2 * marginTopBottom)) * 0.7 / 4);
+			elementFont = new Font(Font.SANS_SERIF, Font.PLAIN, (int) (elementHeight * 0.5));
 			spaceHeight = elementHeight / 3;
 			
 		// Dodanie listy
 			list = new JComboBox<String>();
+			list.setFont(elementFont);
 			list.addItem("DMS (stopnie : minuty : sekundy)");
 			list.addItem("DM (stopnie : minuty)");
 			list.setBounds(marginLeftRight, marginTopBottom, elementWidth, elementHeight);
@@ -185,6 +188,7 @@ public class Window extends JFrame {
 			
 		// Dodanie pola do wpisywania liczby			
 			dmsDegrees = new JTextField();
+			dmsDegrees.setFont(elementFont);
 				int widthUnit = (int) (elementWidth / 18);
 				dmsDegreesWidth = 5 * widthUnit;
 				dmsMinutesWidth = 5 * widthUnit;
@@ -194,43 +198,49 @@ public class Window extends JFrame {
 			add(dmsDegrees);
 	
 			dmsDegreeCharacter = new JLabel(dmsDegreeCharacterText);
+			dmsDegreeCharacter.setFont(elementFont);
 				dmsDegreeCharacterX = marginLeftRight + dmsDegreesWidth;
-			dmsDegreeCharacter.setBounds(dmsDegreeCharacterX, dmsY, dmsDegreeCharacterWidth, elementHeight);
+			dmsDegreeCharacter.setBounds(dmsDegreeCharacterX, dmsY, widthUnit, elementHeight);
 			add(dmsDegreeCharacter);
 			
 			dmsMinutes = new JTextField();
+			dmsMinutes.setFont(elementFont);
 				dmsMinutesX = dmsDegreeCharacterX + widthUnit;
 			dmsMinutes.setBounds(dmsMinutesX, dmsY, dmsMinutesWidth, elementHeight);
 			add(dmsMinutes);
 			
 			dmsMinutesCharacter = new JLabel(dmsMinutesCharacterText);
+			dmsMinutesCharacter.setFont(elementFont);
 				dmsMinutesCharacterX = dmsMinutesX + dmsMinutesWidth;
-			dmsMinutesCharacter.setBounds(dmsMinutesCharacterX, dmsY, dmsMinutesCharacterWidth, elementHeight);
+			dmsMinutesCharacter.setBounds(dmsMinutesCharacterX, dmsY, widthUnit, elementHeight);
 			add(dmsMinutesCharacter);
 				
 			if ("DMS".equals(mode)) {	
 				dmsSeconds = new JTextField();
+				dmsSeconds.setFont(elementFont);
 					dmsSecondsX = dmsMinutesCharacterX + widthUnit;
 				dmsSeconds.setBounds(dmsSecondsX, dmsY, dmsSecondsWidth, elementHeight);
 				add(dmsSeconds);
 				
 				dmsSecondsCharacter = new JLabel(dmsSecondsCharacterText);
+				dmsSecondsCharacter.setFont(elementFont);
 					dmsSecondsCharacterX = dmsSecondsX + dmsSecondsWidth;
-				dmsSecondsCharacter.setBounds(dmsSecondsCharacterX, dmsY, dmsSecondsCharacterWidth, elementHeight);
+				dmsSecondsCharacter.setBounds(dmsSecondsCharacterX, dmsY, widthUnit, elementHeight);
 				add(dmsSecondsCharacter);				
 			}
 			
 		// Dodanie pola wyœwietlaj¹cego wynik
 			label = new JLabel();
-			labelY = dmsY + elementHeight + spaceHeight;
+			label.setFont(elementFont);
+				labelY = dmsY + elementHeight + spaceHeight;
 			label.setBounds(marginLeftRight, labelY, elementWidth, elementHeight);
 			label.setText(labelText);
 			add(label);
 			
 		// Dodanie przycisku przeliczania
-				Font font = new Font(Font.SANS_SERIF, Font.PLAIN, 20);
 				countButtonHeight = (int) ((contentHeight - (2 * marginTopBottom)) * 0.3);
 				countButtonY = (int) ((contentHeight - (2 * marginTopBottom)) * 0.7 + marginTopBottom);
+				Font font = new Font(Font.SANS_SERIF, Font.PLAIN, (int) (countButtonHeight * 0.5));
 			countButton = new JButton();
 			countButton.setFont(font);
 			countButton.setBounds(marginLeftRight, countButtonY, elementWidth, countButtonHeight);
