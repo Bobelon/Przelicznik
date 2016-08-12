@@ -160,7 +160,7 @@ public class Window extends JFrame {
 		// Ustawianie parametrów okna
 			windowWidth = desktopWidth / 2;
 			windowHeight = desktopHeight / 2;
-			setBounds(windowWidth, 0, windowWidth, windowHeight);
+			setBounds((desktopWidth - windowWidth) / 2, (desktopHeight - windowHeight) / 2, windowWidth, windowHeight);
 			setTitle(windowName);
 			setLayout(null);
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
