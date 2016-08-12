@@ -2,6 +2,8 @@ package com.example;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,11 +15,9 @@ import javax.swing.JTextField;
 
 public class Window extends JFrame {
 	
-	// Wspó³rzêdne po³o¿enia okna
-		private int windowX = 0;
-		private int windowY = 0;
-		private int windowWidth = 500;
-		private int windowHeight = 300;
+	// Parametry pulpitu
+		private int desktopWidth;
+		private int desktopHeight;
 
 	// Dodatkowe parametry okna
 		private String windowName = "Przelicznik";
@@ -142,12 +142,17 @@ public class Window extends JFrame {
 	// Inne
 		private Calculations calculate = new Calculations();
 	
-	public Window() {
+	public Window() {			
+		// Pobranie wymiarów pulpitu		
+			desktopWidth = (int) GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getWidth();			
+			desktopHeight = (int) GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getHeight();
+		
 		// Ustawianie parametrów okna
-			setBounds(windowX, windowY, windowWidth, windowHeight);
+			setBounds(desktopWidth / 2, 0, desktopWidth / 2, desktopHeight / 2);
 			setTitle(windowName);
 			setLayout(null);
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			
 			
 		// Dodanie listy
 			list = new JComboBox<String>();
@@ -196,7 +201,8 @@ public class Window extends JFrame {
 			countButton.setText(countButtonText);
 			countButton.addActionListener(buttonActionListener);
 			add(countButton);
-			
 		setVisible(true);
+		System.out.println("Szerokoœæ = " + desktopWidth + "\nWysokoœæ = " + desktopHeight);
+		
 	}
 }
