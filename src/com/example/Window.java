@@ -19,8 +19,16 @@ public class Window extends JFrame {
 		private int desktopWidth;
 		private int desktopHeight;
 
-	// Dodatkowe parametry okna
+	// Parametry okna
 		private String windowName = "Przelicznik";
+		private int windowWidth;
+		private int windowHeight;
+		private int contentWidth;
+		private int contentHeight;
+		private int marginLeftRight;
+		private int marginTopBottom;
+		private int elementWidth;
+		private int elementHeight;
 		
 	// Elementy okna
 		private JComboBox<String> list;
@@ -81,7 +89,7 @@ public class Window extends JFrame {
 			private int countButtonY = 100;
 			private int countButtonWidth = 400;
 			private int countButtonHeight = 20;
-			private String countButtonText = "Przelicz";
+			private String countButtonText = "JPrzelicz";
 
 	// Listenery
 		private ActionListener listActionListener = new ActionListener() {
@@ -146,25 +154,36 @@ public class Window extends JFrame {
 		// Pobranie wymiarów pulpitu		
 			desktopWidth = (int) GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getWidth();			
 			desktopHeight = (int) GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getHeight();
-		
+			
 		// Ustawianie parametrów okna
-			setBounds(desktopWidth / 2, 0, desktopWidth / 2, desktopHeight / 2);
+			windowWidth = desktopWidth / 2;
+			windowHeight = desktopHeight / 2;
+			setBounds(windowWidth, 0, windowWidth, windowHeight);
 			setTitle(windowName);
 			setLayout(null);
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			
+		// Obliczanie po³o¿enia elementów:
+			setVisible(true);
+				contentWidth = getContentPane().getWidth();
+				contentHeight = getContentPane().getHeight();
+			setVisible(false);
+			marginLeftRight = (int) (contentWidth * 0.05);
+			marginTopBottom = (int) (contentHeight * 0.05);
+			elementWidth = contentWidth - (2 * marginLeftRight);
+			//elementHeight = contentHeight - (2 * marginTopBottom);
 			
 		// Dodanie listy
 			list = new JComboBox<String>();
 			list.addItem("DMS (stopnie : minuty : sekundy)");
 			list.addItem("DM (stopnie : minuty)");
-			list.setBounds(listX, listY, listWidth, listHeight);
+			list.setBounds(marginLeftRight, marginTopBottom, elementWidth, listHeight);
 			list.addActionListener(listActionListener);
 			add(list);
 			
 		// Dodanie pola do wpisywania liczby			
 			dmsDegrees = new JTextField();
-			dmsDegrees.setBounds(dmsDegreesX, dmsDegreesY, dmsDegreesWidth, dmsDegreesHeight);
+			dmsDegrees.setBounds(marginLeftRight, dmsDegreesY, dmsDegreesWidth, dmsDegreesHeight);
 			add(dmsDegrees);
 	
 			dmsDegreeCharacter = new JLabel(dmsDegreeCharacterText);
@@ -191,18 +210,21 @@ public class Window extends JFrame {
 			
 		// Dodanie pola wyœwietlaj¹cego wynik
 			label = new JLabel();
-			label.setBounds(labelX, labelY, labelWidth, labelHeight);
+			label.setBounds(marginLeftRight, labelY, elementWidth, labelHeight);
 			label.setText(labelText);
 			add(label);
 			
 		// Dodanie przycisku przeliczania
+				Font font = new Font(Font.SANS_SERIF, Font.PLAIN, 20);
+				countButtonHeight = (int) ((contentHeight - (2 * marginTopBottom)) * 0.3);
+				countButtonY = (int) ((contentHeight - (2 * marginTopBottom)) * 0.7 + marginTopBottom);
 			countButton = new JButton();
-			countButton.setBounds(countButtonX, countButtonY, countButtonWidth, countButtonHeight);
+			countButton.setFont(font);
+			countButton.setBounds(marginLeftRight, countButtonY, elementWidth, countButtonHeight);
 			countButton.setText(countButtonText);
 			countButton.addActionListener(buttonActionListener);
 			add(countButton);
 		setVisible(true);
-		System.out.println("Szerokoœæ = " + desktopWidth + "\nWysokoœæ = " + desktopHeight);
 		
 	}
 }
