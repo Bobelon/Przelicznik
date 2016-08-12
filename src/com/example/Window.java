@@ -185,28 +185,37 @@ public class Window extends JFrame {
 			
 		// Dodanie pola do wpisywania liczby			
 			dmsDegrees = new JTextField();
+				int widthUnit = (int) (elementWidth / 18);
+				dmsDegreesWidth = 5 * widthUnit;
+				dmsMinutesWidth = 5 * widthUnit;
+				dmsSecondsWidth = 5 * widthUnit;
 			dmsY = marginTopBottom + elementHeight + spaceHeight;
 			dmsDegrees.setBounds(marginLeftRight, dmsY, dmsDegreesWidth, elementHeight);
 			add(dmsDegrees);
 	
 			dmsDegreeCharacter = new JLabel(dmsDegreeCharacterText);
+				dmsDegreeCharacterX = marginLeftRight + dmsDegreesWidth;
 			dmsDegreeCharacter.setBounds(dmsDegreeCharacterX, dmsY, dmsDegreeCharacterWidth, elementHeight);
 			add(dmsDegreeCharacter);
 			
 			dmsMinutes = new JTextField();
+				dmsMinutesX = dmsDegreeCharacterX + widthUnit;
 			dmsMinutes.setBounds(dmsMinutesX, dmsY, dmsMinutesWidth, elementHeight);
 			add(dmsMinutes);
 			
 			dmsMinutesCharacter = new JLabel(dmsMinutesCharacterText);
+				dmsMinutesCharacterX = dmsMinutesX + dmsMinutesWidth;
 			dmsMinutesCharacter.setBounds(dmsMinutesCharacterX, dmsY, dmsMinutesCharacterWidth, elementHeight);
 			add(dmsMinutesCharacter);
 				
 			if ("DMS".equals(mode)) {	
 				dmsSeconds = new JTextField();
+					dmsSecondsX = dmsMinutesCharacterX + widthUnit;
 				dmsSeconds.setBounds(dmsSecondsX, dmsY, dmsSecondsWidth, elementHeight);
 				add(dmsSeconds);
 				
 				dmsSecondsCharacter = new JLabel(dmsSecondsCharacterText);
+					dmsSecondsCharacterX = dmsSecondsX + dmsSecondsWidth;
 				dmsSecondsCharacter.setBounds(dmsSecondsCharacterX, dmsY, dmsSecondsCharacterWidth, elementHeight);
 				add(dmsSecondsCharacter);				
 			}
