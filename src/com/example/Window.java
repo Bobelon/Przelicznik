@@ -243,6 +243,7 @@ public class Window extends JFrame {
 				Font font = new Font(Font.SANS_SERIF, Font.PLAIN, (int) (countButtonHeight * 0.5));
 			countButton = new JButton();
 			countButton.setFont(font);
+			Rectangle buttonBounds = new Rectangle(marginLeftRight, countButtonY, elementWidth, countButtonHeight);
 			countButton.setBounds(marginLeftRight, countButtonY, elementWidth, countButtonHeight);
 			countButton.setText(countButtonText);
 			countButton.addActionListener(buttonActionListener);
