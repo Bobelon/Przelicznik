@@ -3,6 +3,7 @@ package com.example;
 import java.awt.Font;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -12,7 +13,7 @@ import javax.swing.JTextField;
 
 public class AddField {
 	
-	// Odleg³oœæ elementu od krawêdzi okna (w procentach)
+	// Odleg³oœæ elementu od krawêdzi okna
 		private int marginLeftRight;
 		private int marginTopBottom;
 		
@@ -27,34 +28,34 @@ public class AddField {
 	// Odleg³oœæ miêdzy elementami
 		private int spaceHeight;
 	
-	// Numer elementu w pionie
+	// Numer linii
+		private int numberOfLines;
 		private int number;
 		
 	// Czcionka
 		private Font font;	
+		
+	
+	public AddField(int windowWidth, int windowHeight, int numberOfLines, int marginLeftRight, int marginTopBotton, int spaceHeight) {
+		this.windowWidth = windowWidth;
+		this.windowHeight = windowHeight;
+		this.numberOfLines = numberOfLines;
+		this.marginLeftRight = marginLeftRight; // Musi byæ podane w procentach
+		this.marginTopBottom = marginTopBotton; // Musi byæ podane w procentach
+		this.spaceHeight = spaceHeight; // Musi byæ podane w procentach
+		countParameters();
+	}
 	
 		
-	// KONSTRUKTORY		
-		public AddField(int windowWidth, int windowHeight) {
-			this.windowWidth = windowWidth;
-			this.windowHeight = windowHeight;
-			font = new Font(Font.SANS_SERIF, Font.PLAIN, 10);
-		}
-		
-		public AddField(int windowWidth, int windowHeight, int margin) {
-			this(windowWidth, windowHeight);
-			this.marginLeftRight = margin;
-		}
-		
-		public AddField(int windowWidth, int windowHeight, Font font) {
-			this(windowWidth, windowHeight);
-			this.font = font;
-		}
-		
-		public AddField(int windowWidth, int windowHeight, int margin, Font font) {
-			this(windowWidth, windowHeight, margin);
-			this.font = font;
-		}
+	public void countParameters() {
+		marginLeftRight *= (int) (windowWidth / 100);
+		marginTopBottom *= (int) (windowHeight / 100);
+		spaceHeight *= (int) (windowHeight / 100);
+		elementWidth = windowWidth - (2 * marginLeftRight);
+		System.out.println(numberOfLines);
+		elementHeight = (int) ((windowHeight - (2 * marginTopBottom) - (spaceHeight * numberOfLines)) / numberOfLines);
+		font = new Font(Font.SANS_SERIF, Font.PLAIN, (int) (elementHeight * .5));
+	}
 	
 	public JLabel createJLabel(String text) {
 		JLabel label = new JLabel();
@@ -94,7 +95,7 @@ public class AddField {
 		return button;		
 	}
 	
-	public JTextField createJTextField(String text) {
+	public JTextField createJTextField() {
 		JTextField textField = new JTextField();
 		
 		// Dane pomocnicze
@@ -104,12 +105,29 @@ public class AddField {
 			int height = elementHeight;
 				
 		textField.setBounds(x, y, width, height);
-		textField.setText(text);
 		textField.setFont(font);
 				
 		// Przejœcie do nastêpnej linii
 			number++;
 		
 		return textField;
+	}
+	
+	public JComboBox createJComboBox() {
+		JComboBox comboBox = new JComboBox();
+		
+		// Dane pomocnicze
+			int x = marginLeftRight;
+			int y = marginTopBottom + (elementHeight + spaceHeight) * number;
+			int width = elementWidth;
+			int height = elementHeight;
+				
+		comboBox.setBounds(x, y, width, height);
+		comboBox.setFont(font);
+				
+		// Przejœcie do nastêpnej linii
+			number++;
+		
+		return comboBox;
 	}
 }

@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 
 public class Window extends JFrame {
 	
+	private AddField addField;
+	
 	// Parametry pulpitu
 		private int desktopWidth;
 		private int desktopHeight;
@@ -167,9 +169,9 @@ public class Window extends JFrame {
 			
 		// Obliczanie po³o¿enia elementów:
 			setVisible(true);
+				addField = new AddField(getContentPane().getWidth(), getContentPane().getHeight(), 4, 5, 5, 7);
 				contentWidth = getContentPane().getWidth();
 				contentHeight = getContentPane().getHeight();
-			setVisible(false);
 			marginLeftRight = (int) (contentWidth * 0.05);
 			marginTopBottom = (int) (contentHeight * 0.05);
 			elementWidth = contentWidth - (2 * marginLeftRight);
@@ -178,23 +180,25 @@ public class Window extends JFrame {
 			spaceHeight = elementHeight / 3;
 			
 		// Dodanie listy
-			list = new JComboBox<String>();
-			list.setFont(elementFont);
+			//list = new JComboBox<String>();
+			list = addField.createJComboBox();
+			//list.setFont(elementFont);
 			list.addItem("DMS (stopnie : minuty : sekundy)");
 			list.addItem("DM (stopnie : minuty)");
-			list.setBounds(marginLeftRight, marginTopBottom, elementWidth, elementHeight);
+			//list.setBounds(marginLeftRight, marginTopBottom, elementWidth, elementHeight);
 			list.addActionListener(listActionListener);
 			add(list);
 			
 		// Dodanie pola do wpisywania liczby			
-			dmsDegrees = new JTextField();
-			dmsDegrees.setFont(elementFont);
+			//dmsDegrees = new JTextField();
+			dmsDegrees = addField.createJTextField();
+			//dmsDegrees.setFont(elementFont);
 				int widthUnit = (int) (elementWidth / 18);
 				dmsDegreesWidth = 5 * widthUnit;
 				dmsMinutesWidth = 5 * widthUnit;
 				dmsSecondsWidth = 5 * widthUnit;
 			dmsY = marginTopBottom + elementHeight + spaceHeight;
-			dmsDegrees.setBounds(marginLeftRight, dmsY, dmsDegreesWidth, elementHeight);
+			//dmsDegrees.setBounds(marginLeftRight, dmsY, dmsDegreesWidth, elementHeight);
 			add(dmsDegrees);
 	
 			dmsDegreeCharacter = new JLabel(dmsDegreeCharacterText);
@@ -230,25 +234,26 @@ public class Window extends JFrame {
 			}
 			
 		// Dodanie pola wyœwietlaj¹cego wynik
-			label = new JLabel();
-			label.setFont(elementFont);
+			//label = new JLabel();
+			label = addField.createJLabel(labelText);
+			//label.setFont(elementFont);
 				labelY = dmsY + elementHeight + spaceHeight;
-			label.setBounds(marginLeftRight, labelY, elementWidth, elementHeight);
-			label.setText(labelText);
+			//label.setBounds(marginLeftRight, labelY, elementWidth, elementHeight);
+			//label.setText(labelText);
 			add(label);
 			
 		// Dodanie przycisku przeliczania
 				countButtonHeight = (int) ((contentHeight - (2 * marginTopBottom)) * 0.3);
 				countButtonY = (int) ((contentHeight - (2 * marginTopBottom)) * 0.7 + marginTopBottom);
 				Font font = new Font(Font.SANS_SERIF, Font.PLAIN, (int) (countButtonHeight * 0.5));
-			countButton = new JButton();
-			countButton.setFont(font);
+			//countButton = new JButton();
+				countButton = addField.createJButton(countButtonText);
+			//countButton.setFont(font);
 			Rectangle buttonBounds = new Rectangle(marginLeftRight, countButtonY, elementWidth, countButtonHeight);
-			countButton.setBounds(marginLeftRight, countButtonY, elementWidth, countButtonHeight);
-			countButton.setText(countButtonText);
+			//countButton.setBounds(marginLeftRight, countButtonY, elementWidth, countButtonHeight);
+			//countButton.setText(countButtonText);
 			countButton.addActionListener(buttonActionListener);
 			add(countButton);
-		setVisible(true);
 		
 	}
 }
