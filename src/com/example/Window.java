@@ -169,7 +169,7 @@ public class Window extends JFrame {
 			
 		// Obliczanie po³o¿enia elementów:
 			setVisible(true);
-				addField = new AddField(getContentPane().getWidth(), getContentPane().getHeight(), 4, 5, 5, 7);
+			addField = new AddField(getContentPane().getWidth(), getContentPane().getHeight(), 4, 5, 5, 7);
 				contentWidth = getContentPane().getWidth();
 				contentHeight = getContentPane().getHeight();
 			marginLeftRight = (int) (contentWidth * 0.05);
@@ -191,45 +191,51 @@ public class Window extends JFrame {
 			
 		// Dodanie pola do wpisywania liczby			
 			//dmsDegrees = new JTextField();
-			dmsDegrees = addField.createJTextField();
+			
 			//dmsDegrees.setFont(elementFont);
-				int widthUnit = (int) (elementWidth / 18);
+				int widthUnit = (int) (addField.getElementWidth() / 18);
 				dmsDegreesWidth = 5 * widthUnit;
 				dmsMinutesWidth = 5 * widthUnit;
 				dmsSecondsWidth = 5 * widthUnit;
+				
+			int textFieldWidth = 5 * widthUnit;
+			int characterWidth = widthUnit;
+			
+			dmsDegrees = addField.createJTextField(textFieldWidth, 0 * 6 * widthUnit, false);
+			dmsMinutes = addField.createJTextField(textFieldWidth, 1 * 6 * widthUnit, false);
 			dmsY = marginTopBottom + elementHeight + spaceHeight;
 			//dmsDegrees.setBounds(marginLeftRight, dmsY, dmsDegreesWidth, elementHeight);
 			add(dmsDegrees);
 	
-			dmsDegreeCharacter = new JLabel(dmsDegreeCharacterText);
-			dmsDegreeCharacter.setFont(elementFont);
-				dmsDegreeCharacterX = marginLeftRight + dmsDegreesWidth;
-			dmsDegreeCharacter.setBounds(dmsDegreeCharacterX, dmsY, widthUnit, elementHeight);
+			dmsDegreeCharacter = addField.createJLabel("*", characterWidth, 1 * 6 * widthUnit - widthUnit, false);
+			//dmsDegreeCharacter.setFont(elementFont);
+			//	dmsDegreeCharacterX = marginLeftRight + dmsDegreesWidth;
+			//dmsDegreeCharacter.setBounds(dmsDegreeCharacterX, dmsY, widthUnit, elementHeight);
 			add(dmsDegreeCharacter);
 			
-			dmsMinutes = new JTextField();
-			dmsMinutes.setFont(elementFont);
-				dmsMinutesX = dmsDegreeCharacterX + widthUnit;
-			dmsMinutes.setBounds(dmsMinutesX, dmsY, dmsMinutesWidth, elementHeight);
+			//dmsMinutes = new JTextField();
+			//dmsMinutes.setFont(elementFont);
+			//	dmsMinutesX = dmsDegreeCharacterX + widthUnit;
+			//dmsMinutes.setBounds(dmsMinutesX, dmsY, dmsMinutesWidth, elementHeight);
 			add(dmsMinutes);
 			
-			dmsMinutesCharacter = new JLabel(dmsMinutesCharacterText);
-			dmsMinutesCharacter.setFont(elementFont);
-				dmsMinutesCharacterX = dmsMinutesX + dmsMinutesWidth;
-			dmsMinutesCharacter.setBounds(dmsMinutesCharacterX, dmsY, widthUnit, elementHeight);
+			dmsMinutesCharacter = addField.createJLabel("\"", characterWidth, 2 * 6 * widthUnit - widthUnit, false);
+			///dmsMinutesCharacter.setFont(elementFont);
+			//	dmsMinutesCharacterX = dmsMinutesX + dmsMinutesWidth;
+			//dmsMinutesCharacter.setBounds(dmsMinutesCharacterX, dmsY, widthUnit, elementHeight);
 			add(dmsMinutesCharacter);
 				
 			if ("DMS".equals(mode)) {	
-				dmsSeconds = new JTextField();
-				dmsSeconds.setFont(elementFont);
-					dmsSecondsX = dmsMinutesCharacterX + widthUnit;
-				dmsSeconds.setBounds(dmsSecondsX, dmsY, dmsSecondsWidth, elementHeight);
+				dmsSeconds = addField.createJTextField(textFieldWidth, 2 * 6 * widthUnit, false);
+				//dmsSeconds.setFont(elementFont);
+					//dmsSecondsX = dmsMinutesCharacterX + widthUnit;
+				//dmsSeconds.setBounds(dmsSecondsX, dmsY, dmsSecondsWidth, elementHeight);
 				add(dmsSeconds);
 				
-				dmsSecondsCharacter = new JLabel(dmsSecondsCharacterText);
-				dmsSecondsCharacter.setFont(elementFont);
-					dmsSecondsCharacterX = dmsSecondsX + dmsSecondsWidth;
-				dmsSecondsCharacter.setBounds(dmsSecondsCharacterX, dmsY, widthUnit, elementHeight);
+				dmsSecondsCharacter = addField.createJLabel("'", characterWidth, 3 * 6 * widthUnit - widthUnit, true);
+				//dmsSecondsCharacter.setFont(elementFont);
+				//	dmsSecondsCharacterX = dmsSecondsX + dmsSecondsWidth;
+				//dmsSecondsCharacter.setBounds(dmsSecondsCharacterX, dmsY, widthUnit, elementHeight);
 				add(dmsSecondsCharacter);				
 			}
 			

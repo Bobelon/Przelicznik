@@ -52,7 +52,6 @@ public class AddField {
 		marginTopBottom *= (int) (windowHeight / 100);
 		spaceHeight *= (int) (windowHeight / 100);
 		elementWidth = windowWidth - (2 * marginLeftRight);
-		System.out.println(numberOfLines);
 		elementHeight = (int) ((windowHeight - (2 * marginTopBottom) - (spaceHeight * numberOfLines)) / numberOfLines);
 		font = new Font(Font.SANS_SERIF, Font.PLAIN, (int) (elementHeight * .5));
 	}
@@ -72,6 +71,25 @@ public class AddField {
 				
 		// Przejœcie do nastêpnej linii
 			number++;
+		
+		return label;
+	}
+	
+	public JLabel createJLabel(String text, int width, int x, boolean newLine) {
+		JLabel label = new JLabel();
+		
+		// Dane pomocnicze
+			x += marginLeftRight;
+			int y = marginTopBottom + (elementHeight + spaceHeight) * number;
+			int height = elementHeight;
+				
+		label.setBounds(x, y, width, height);
+		label.setText(text);
+		label.setFont(font);
+		
+		if(newLine) {
+			number++;
+		}
 		
 		return label;
 	}
@@ -113,6 +131,24 @@ public class AddField {
 		return textField;
 	}
 	
+	public JTextField createJTextField(int width, int x, boolean newLine) {
+		JTextField textField = new JTextField();
+		
+		// Dane pomocnicze
+			x += marginLeftRight;
+			int y = marginTopBottom + (elementHeight + spaceHeight) * number;
+			int height = elementHeight;
+				
+		textField.setBounds(x, y, width, height);
+		textField.setFont(font);
+		
+		if(newLine) {
+			number++;
+		}
+		
+		return textField;
+	}
+	
 	public JComboBox createJComboBox() {
 		JComboBox comboBox = new JComboBox();
 		
@@ -129,5 +165,13 @@ public class AddField {
 			number++;
 		
 		return comboBox;
+	}
+	
+	public void nextLine() {
+		number++;
+	}
+	 
+	public int getElementWidth() {
+		return elementWidth;
 	}
 }
