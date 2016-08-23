@@ -59,14 +59,13 @@ public class AddField {
 		this.spaceHeight = spaceHeight; // Musi być podane w procentach
 		countParameters();
 		backgroundColor = randomColor();
-		elementColor = setColor(backgroundColor, 10);
-		hoverColor = setColor(backgroundColor, 20);
+		elementColor = setColor(backgroundColor, 20);
+		hoverColor = setColor(backgroundColor, 40);
 		
 		mouseListener = new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
+				((JComponent) arg0.getSource()).setBackground(hoverColor);
 			}
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
@@ -78,13 +77,11 @@ public class AddField {
 			}
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
+				((JComponent) arg0.getSource()).setBackground(hoverColor);
 			}
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
+				((JComponent) arg0.getSource()).setBackground(hoverColor);
 			}			
 		};
 	}
@@ -152,6 +149,7 @@ public class AddField {
 		button.setBackground(elementColor);
 		button.setBorder(null);
 		button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		button.setFocusable(false);
 		button.addMouseListener(mouseListener);
 		
 		// Przejście do następnej linii
@@ -188,6 +186,8 @@ public class AddField {
 				
 		textField.setBounds(x, y, width, height);
 		textField.setFont(font);
+		textField.setBackground(elementColor);
+		textField.setBorder(null);
 		
 		if(newLine) {
 			number++;
@@ -207,6 +207,9 @@ public class AddField {
 				
 		comboBox.setBounds(x, y, width, height);
 		comboBox.setFont(font);
+		comboBox.setBackground(elementColor);
+		comboBox.setBorder(null);
+		comboBox.setFocusable(false);
 				
 		// Przejście do następnej linii
 			number++;
