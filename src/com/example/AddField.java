@@ -52,7 +52,7 @@ public class AddField {
 		marginTopBottom *= (int) (windowHeight / 100);
 		spaceHeight *= (int) (windowHeight / 100);
 		elementWidth = windowWidth - (2 * marginLeftRight);
-		elementHeight = (int) ((windowHeight - (2 * marginTopBottom) - (spaceHeight * numberOfLines)) / numberOfLines);
+		elementHeight = (int) ((windowHeight - (2 * marginTopBottom) - (spaceHeight * (numberOfLines - 1))) / numberOfLines);
 		font = new Font(Font.SANS_SERIF, Font.PLAIN, (int) (elementHeight * .5));
 	}
 	

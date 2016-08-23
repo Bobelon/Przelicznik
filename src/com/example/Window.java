@@ -22,78 +22,21 @@ public class Window extends JFrame {
 		private int desktopHeight;
 
 	// Parametry okna
-		private String windowName = "Przelicznik";
 		private int windowWidth;
 		private int windowHeight;
-		private int contentWidth;
-		private int contentHeight;
-		private int spaceHeight;
-		private int marginLeftRight;
-		private int marginTopBottom;
-		private int elementWidth;
-		private int elementHeight;
-		private Font elementFont;
 		
 	// Elementy okna
 		private JComboBox<String> list;
-			private int listX = 10;
-			private int listY = 10;
-			private int listWidth = 400;
-			private int listHeight = 20;
-			private String mode = "DMS";
-			
-		private JTextField dmsDegrees;
-			private int dmsDegreesX = 10;
-			private int dmsY = 40;
-			private int dmsDegreesWidth = 40;
-			private int dmsDegreesHeight = 20;
-			
-		private JLabel dmsDegreeCharacter;
-			private int dmsDegreeCharacterX = 50;
-			private int dmsDegreeCharacterY = 40;
-			private int dmsDegreeCharacterWidth = 10;
-			private int dmsDegreeCharacterHeight = 20;
-			private String dmsDegreeCharacterText = "*";		
-
-		private JTextField dmsMinutes;
-			private int dmsMinutesX = 60;
-			private int dmsMinutesY = 40;
-			private int dmsMinutesWidth = 40;
-			private int dmsMinutesHeight = 20;
-			
+			private String mode = "DMS";			
+		private JTextField dmsDegrees;	
+		private JTextField dmsMinutes;	
+		private JTextField dmsSeconds;			
+		private JLabel dmsDegreeCharacter;	
 		private JLabel dmsMinutesCharacter;
-			private int dmsMinutesCharacterX = 100;
-			private int dmsMinutesCharacterY = 40;
-			private int dmsMinutesCharacterWidth = 10;
-			private int dmsMinutesCharacterHeight = 20;
-			private String dmsMinutesCharacterText = "'";	
-
-		private JTextField dmsSeconds;
-			private int dmsSecondsX = 110;
-			private int dmsSecondsY = 40;
-			private int dmsSecondsWidth = 40;
-			private int dmsSecondsHeight = 20;
-				
-		private JLabel dmsSecondsCharacter;
-			private int dmsSecondsCharacterX = 150;
-			private int dmsSecondsCharacterY = 40;
-			private int dmsSecondsCharacterWidth = 10;
-			private int dmsSecondsCharacterHeight = 20;
-			private String dmsSecondsCharacterText = "\"";
-			
+		private JLabel dmsSecondsCharacter;			
 		private JLabel label;
-			private int labelX = 10;
-			private int labelY = 70;
-			private int labelWidth = 400;
-			private int labelHeight = 20;
-			private String labelText = "Wynik";
-			
+			private String labelText = "Wynik";			
 		private JButton countButton;
-			private int countButtonX = 10;
-			private int countButtonY = 100;
-			private int countButtonWidth = 400;
-			private int countButtonHeight = 20;
-			private String countButtonText = "Przelicz";
 
 	// Listenery
 		private ActionListener listActionListener = new ActionListener() {
@@ -160,106 +103,53 @@ public class Window extends JFrame {
 			desktopHeight = (int) GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getHeight();
 			
 		// Ustawianie parametrów okna
-			windowWidth = desktopWidth / 2;
-			windowHeight = desktopHeight / 2;
+			windowWidth = (int) GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getWidth() / 2;
+			windowHeight = (int) GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getHeight() / 2;
 			setBounds((desktopWidth - windowWidth) / 2, (desktopHeight - windowHeight) / 2, windowWidth, windowHeight);
-			setTitle(windowName);
+			setTitle("Przelicznik");
 			setLayout(null);
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			
 		// Obliczanie po³o¿enia elementów:
 			setVisible(true);
 			addField = new AddField(getContentPane().getWidth(), getContentPane().getHeight(), 4, 5, 5, 7);
-				contentWidth = getContentPane().getWidth();
-				contentHeight = getContentPane().getHeight();
-			marginLeftRight = (int) (contentWidth * 0.05);
-			marginTopBottom = (int) (contentHeight * 0.05);
-			elementWidth = contentWidth - (2 * marginLeftRight);
-			elementHeight = (int) ((contentHeight - (2 * marginTopBottom)) * 0.7 / 4);
-			elementFont = new Font(Font.SANS_SERIF, Font.PLAIN, (int) (elementHeight * 0.5));
-			spaceHeight = elementHeight / 3;
 			
 		// Dodanie listy
-			//list = new JComboBox<String>();
 			list = addField.createJComboBox();
-			//list.setFont(elementFont);
-			list.addItem("DMS (stopnie : minuty : sekundy)");
-			list.addItem("DM (stopnie : minuty)");
-			//list.setBounds(marginLeftRight, marginTopBottom, elementWidth, elementHeight);
+				list.addItem("DMS (stopnie : minuty : sekundy)");
+				list.addItem("DM (stopnie : minuty)");
 			list.addActionListener(listActionListener);
 			add(list);
 			
-		// Dodanie pola do wpisywania liczby			
-			//dmsDegrees = new JTextField();
-			
-			//dmsDegrees.setFont(elementFont);
-				int widthUnit = (int) (addField.getElementWidth() / 18);
-				dmsDegreesWidth = 5 * widthUnit;
-				dmsMinutesWidth = 5 * widthUnit;
-				dmsSecondsWidth = 5 * widthUnit;
-				
+		// Dodanie pola do wpisywania liczby	
+			int widthUnit = (int) (addField.getElementWidth() / 18);				
 			int textFieldWidth = 5 * widthUnit;
 			int characterWidth = widthUnit;
 			
 			dmsDegrees = addField.createJTextField(textFieldWidth, 0 * 6 * widthUnit, false);
-			dmsMinutes = addField.createJTextField(textFieldWidth, 1 * 6 * widthUnit, false);
-			dmsY = marginTopBottom + elementHeight + spaceHeight;
-			//dmsDegrees.setBounds(marginLeftRight, dmsY, dmsDegreesWidth, elementHeight);
 			add(dmsDegrees);
-	
 			dmsDegreeCharacter = addField.createJLabel("*", characterWidth, 1 * 6 * widthUnit - widthUnit, false);
-			//dmsDegreeCharacter.setFont(elementFont);
-			//	dmsDegreeCharacterX = marginLeftRight + dmsDegreesWidth;
-			//dmsDegreeCharacter.setBounds(dmsDegreeCharacterX, dmsY, widthUnit, elementHeight);
 			add(dmsDegreeCharacter);
 			
-			//dmsMinutes = new JTextField();
-			//dmsMinutes.setFont(elementFont);
-			//	dmsMinutesX = dmsDegreeCharacterX + widthUnit;
-			//dmsMinutes.setBounds(dmsMinutesX, dmsY, dmsMinutesWidth, elementHeight);
-			add(dmsMinutes);
-			
+			dmsMinutes = addField.createJTextField(textFieldWidth, 1 * 6 * widthUnit, false);	
+			add(dmsMinutes);			
 			dmsMinutesCharacter = addField.createJLabel("\"", characterWidth, 2 * 6 * widthUnit - widthUnit, false);
-			///dmsMinutesCharacter.setFont(elementFont);
-			//	dmsMinutesCharacterX = dmsMinutesX + dmsMinutesWidth;
-			//dmsMinutesCharacter.setBounds(dmsMinutesCharacterX, dmsY, widthUnit, elementHeight);
 			add(dmsMinutesCharacter);
 				
 			if ("DMS".equals(mode)) {	
 				dmsSeconds = addField.createJTextField(textFieldWidth, 2 * 6 * widthUnit, false);
-				//dmsSeconds.setFont(elementFont);
-					//dmsSecondsX = dmsMinutesCharacterX + widthUnit;
-				//dmsSeconds.setBounds(dmsSecondsX, dmsY, dmsSecondsWidth, elementHeight);
-				add(dmsSeconds);
-				
+				add(dmsSeconds);				
 				dmsSecondsCharacter = addField.createJLabel("'", characterWidth, 3 * 6 * widthUnit - widthUnit, true);
-				//dmsSecondsCharacter.setFont(elementFont);
-				//	dmsSecondsCharacterX = dmsSecondsX + dmsSecondsWidth;
-				//dmsSecondsCharacter.setBounds(dmsSecondsCharacterX, dmsY, widthUnit, elementHeight);
 				add(dmsSecondsCharacter);				
 			}
 			
 		// Dodanie pola wyœwietlaj¹cego wynik
-			//label = new JLabel();
 			label = addField.createJLabel(labelText);
-			//label.setFont(elementFont);
-				labelY = dmsY + elementHeight + spaceHeight;
-			//label.setBounds(marginLeftRight, labelY, elementWidth, elementHeight);
-			//label.setText(labelText);
 			add(label);
 			
 		// Dodanie przycisku przeliczania
-				countButtonHeight = (int) ((contentHeight - (2 * marginTopBottom)) * 0.3);
-				countButtonY = (int) ((contentHeight - (2 * marginTopBottom)) * 0.7 + marginTopBottom);
-				Font font = new Font(Font.SANS_SERIF, Font.PLAIN, (int) (countButtonHeight * 0.5));
-			//countButton = new JButton();
-				countButton = addField.createJButton(countButtonText);
-			//countButton.setFont(font);
-			Rectangle buttonBounds = new Rectangle(marginLeftRight, countButtonY, elementWidth, countButtonHeight);
-			//countButton.setBounds(marginLeftRight, countButtonY, elementWidth, countButtonHeight);
-			//countButton.setText(countButtonText);
+			countButton = addField.createJButton("Przelicz");
 			countButton.addActionListener(buttonActionListener);
-			add(countButton);
-		
+			add(countButton);		
 	}
 }
