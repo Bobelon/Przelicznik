@@ -113,6 +113,7 @@ public class Window extends JFrame {
 		// Obliczanie po³o¿enia elementów:
 			setVisible(true);
 			addField = new AddField(getContentPane().getWidth(), getContentPane().getHeight(), 4, 5, 5, 7);
+			getContentPane().setBackground(addField.getBackgroundColor());
 			
 		// Dodanie listy
 			list = addField.createJComboBox();

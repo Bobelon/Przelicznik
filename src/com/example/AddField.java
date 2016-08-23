@@ -1,31 +1,37 @@
 package com.example;
 
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /*
- * Klasa tworzy przyciski i pola dla klasy Window, oraz oblicza ich po³o¿enie na podstawie rozmiarów okna
+ * Klasa tworzy przyciski i pola dla klasy Window, oraz oblicza ich poÅ‚oÅ¼enie na podstawie rozmiarÃ³w okna
  */
 
 public class AddField {
 	
-	// Odleg³oœæ elementu od krawêdzi okna
+	// OdlegÅ‚oÅ›Ä‡ elementu od krawÄ™dzi okna
 		private int marginLeftRight;
 		private int marginTopBottom;
 		
-	// Wysokoœæ i szerokoœæ okna
+	// WysokoÅ›Ä‡ i szerokoÅ›Ä‡ okna
 		private int windowWidth;
 		private int windowHeight;
 		
-	// Wysokoœæ i szerokoœæ elementów
+	// WysokoÅ›Ä‡ i szerokoÅ›Ä‡ elementÃ³w
 		private int elementWidth;
 		private int elementHeight;
 		
-	// Odleg³oœæ miêdzy elementami
+	// OdlegÅ‚oÅ›Ä‡ miÄ™dzy elementami
 		private int spaceHeight;
 	
 	// Numer linii
@@ -35,15 +41,52 @@ public class AddField {
 	// Czcionka
 		private Font font;	
 		
+	// Kolory elementÃ³w
+		private static Color backgroundColor;
+		private static Color elementColor;
+		private static Color hoverColor;
+		
+	//Listener
+		MouseListener mouseListener;
+		
 	
 	public AddField(int windowWidth, int windowHeight, int numberOfLines, int marginLeftRight, int marginTopBotton, int spaceHeight) {
 		this.windowWidth = windowWidth;
 		this.windowHeight = windowHeight;
 		this.numberOfLines = numberOfLines;
-		this.marginLeftRight = marginLeftRight; // Musi byæ podane w procentach
-		this.marginTopBottom = marginTopBotton; // Musi byæ podane w procentach
-		this.spaceHeight = spaceHeight; // Musi byæ podane w procentach
+		this.marginLeftRight = marginLeftRight; // Musi byÄ‡ podane w procentach
+		this.marginTopBottom = marginTopBotton; // Musi byÄ‡ podane w procentach
+		this.spaceHeight = spaceHeight; // Musi byÄ‡ podane w procentach
 		countParameters();
+		backgroundColor = randomColor();
+		elementColor = setColor(backgroundColor, 10);
+		hoverColor = setColor(backgroundColor, 20);
+		
+		mouseListener = new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				((JComponent) arg0.getSource()).setBackground(hoverColor);				
+			}
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				((JComponent) arg0.getSource()).setBackground(elementColor);
+			}
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}			
+		};
 	}
 	
 		
@@ -69,7 +112,7 @@ public class AddField {
 		label.setText(text);
 		label.setFont(font);
 				
-		// Przejœcie do nastêpnej linii
+		// PrzejÅ›cie do nastÄ™pnej linii
 			number++;
 		
 		return label;
@@ -106,8 +149,12 @@ public class AddField {
 		button.setBounds(x, y, width, height);
 		button.setText(text);
 		button.setFont(font);
+		button.setBackground(elementColor);
+		button.setBorder(null);
+		button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		button.addMouseListener(mouseListener);
 		
-		// Przejœcie do nastêpnej linii
+		// PrzejÅ›cie do nastÄ™pnej linii
 			number++;
 		
 		return button;		
@@ -125,7 +172,7 @@ public class AddField {
 		textField.setBounds(x, y, width, height);
 		textField.setFont(font);
 				
-		// Przejœcie do nastêpnej linii
+		// PrzejÅ›cie do nastÄ™pnej linii
 			number++;
 		
 		return textField;
@@ -161,11 +208,58 @@ public class AddField {
 		comboBox.setBounds(x, y, width, height);
 		comboBox.setFont(font);
 				
-		// Przejœcie do nastêpnej linii
+		// PrzejÅ›cie do nastÄ™pnej linii
 			number++;
 		
 		return comboBox;
 	}
+	
+	// Funkcja zwraca losowo jeden kolor z palety barw
+		private static Color randomColor() {
+			HashMap <Integer, Color> colors = new HashMap <Integer, Color> ();
+			
+			// Tworzenie mapy przykÅ‚adowych kolorÃ³w
+				colors.put(0, new Color (158, 115, 148));
+				colors.put(1, new Color (127, 255, 212));
+				colors.put(2, new Color (255, 127, 80));
+				colors.put(3, new Color (100, 149, 237));
+				colors.put(4, new Color (153, 50, 204));
+				colors.put(5, new Color (233, 150, 122));
+				colors.put(6, new Color (143, 188, 143));
+				colors.put(7, new Color (255, 215, 0));
+				colors.put(8, new Color (173, 255, 47));
+				colors.put(9, new Color (205, 92, 92));
+				colors.put(10, new Color (240, 230, 140));
+				colors.put(11, new Color (173, 216, 230));
+				colors.put(12, new Color (144, 238, 144));
+				colors.put(13, new Color (255, 182, 193));
+				colors.put(14, new Color (255, 160, 122));
+				colors.put(15, new Color (255, 222, 173));
+				colors.put(16, new Color (255, 239, 213));
+				colors.put(17, new Color (250, 128, 114));
+				colors.put(18, new Color (216, 191, 216));
+			
+			return colors.get((int) (Math.random() * colors.size()));
+		}
+		
+	// Funkcja przyciemnia lub objaÅ“nia dany kolor o danÄ… wartoÅ›Ä‡
+		private static Color setColor (Color color, int value) {
+			int red, green, blue;
+			
+			red = color.getRed() + value;
+			green = color.getGreen() + value;
+			blue = color.getBlue() + value;
+				
+			red = red > 255 ? 255 : red;
+			green = green > 255 ? 255 : green;
+			blue = blue > 255 ? 255 : blue;
+			
+			red = red < 0 ? 0 : red;
+			green = green < 0 ? 0 : green;
+			blue = blue < 0 ? 0 : blue;
+			
+			return new Color (red, green, blue);
+		}
 	
 	public void nextLine() {
 		number++;
@@ -173,5 +267,9 @@ public class AddField {
 	 
 	public int getElementWidth() {
 		return elementWidth;
+	}
+	
+	public Color getBackgroundColor() {
+		return backgroundColor;
 	}
 }
