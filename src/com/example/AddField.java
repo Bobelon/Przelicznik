@@ -5,7 +5,6 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -200,8 +199,8 @@ public class AddField {
 		return textField;
 	}
 	
-	public JComboBox createJComboBox() {
-		JComboBox comboBox = new JComboBox();
+	public JComboBox <String> createJComboBox() {
+		JComboBox<String> comboBox = new JComboBox<String>();
 		
 		// Dane pomocnicze
 			int x = marginLeftRight;

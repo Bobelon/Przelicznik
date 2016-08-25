@@ -11,21 +11,17 @@ public class SetColor {
 			// Tworzenie mapy przykładowych kolorów
 				int i = 0;
 				colors.put(i++, new Color (158, 115, 148));
-				colors.put(i++, new Color (127, 255, 212));
 				colors.put(i++, new Color (255, 127, 80));
 				colors.put(i++, new Color (100, 149, 237));
-				colors.put(i++, new Color (153, 50, 204));
 				colors.put(i++, new Color (233, 150, 122));
 				colors.put(i++, new Color (143, 188, 143));
 				colors.put(i++, new Color (255, 215, 0));
-				colors.put(i++, new Color (173, 255, 47));
 				colors.put(i++, new Color (205, 92, 92));
 				colors.put(i++, new Color (240, 230, 140));
 				colors.put(i++, new Color (173, 216, 230));
 				colors.put(i++, new Color (144, 238, 144));
 				colors.put(i++, new Color (255, 160, 122));
 				colors.put(i++, new Color (255, 222, 173));
-				colors.put(i++, new Color (255, 239, 213));
 				colors.put(i++, new Color (250, 128, 114));
 				colors.put(i++, new Color (216, 191, 216));
 			

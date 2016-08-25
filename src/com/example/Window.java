@@ -3,7 +3,7 @@ package com.example;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class Window extends JFrame {
-	
+
 	private AddField addField;
 	
 	// Parametry pulpitu
@@ -93,7 +93,13 @@ public class Window extends JFrame {
 	// Inne
 		private Calculations calculate = new Calculations();
 	
-	public Window() {			
+	public Window() {	
+		// Ikonka programu
+			try {
+				 setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png")));
+			}
+			catch(Exception e) {}
+		
 		// Pobranie wymiarów pulpitu		
 			desktopWidth = (int) GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getWidth();			
 			desktopHeight = (int) GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getHeight();
