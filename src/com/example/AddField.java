@@ -42,12 +42,13 @@ public class AddField {
 		private Font font;	
 		
 	// Kolory elementów
+		private SetColor setColor;
 		private static Color backgroundColor;
 		private static Color elementColor;
 		private static Color hoverColor;
 		
 	//Listener
-		MouseListener mouseListener;
+		private MouseListener mouseListener;
 		
 	
 	public AddField(int windowWidth, int windowHeight, int numberOfLines, int marginLeftRight, int marginTopBotton, int spaceHeight) {
@@ -58,9 +59,10 @@ public class AddField {
 		this.marginTopBottom = marginTopBotton; // Musi być podane w procentach
 		this.spaceHeight = spaceHeight; // Musi być podane w procentach
 		countParameters();
-		backgroundColor = randomColor();
-		elementColor = setColor(backgroundColor, 20);
-		hoverColor = setColor(backgroundColor, 40);
+		setColor = new SetColor();
+		backgroundColor = setColor.getRandomColor();
+		elementColor = setColor.getChangedColor(backgroundColor, 20);
+		hoverColor = setColor.getChangedColor(backgroundColor, 40);
 		
 		mouseListener = new MouseListener() {
 			@Override
@@ -215,54 +217,7 @@ public class AddField {
 			number++;
 		
 		return comboBox;
-	}
-	
-	// Funkcja zwraca losowo jeden kolor z palety barw
-		private static Color randomColor() {
-			HashMap <Integer, Color> colors = new HashMap <Integer, Color> ();
-			
-			// Tworzenie mapy przykładowych kolorów
-				colors.put(0, new Color (158, 115, 148));
-				colors.put(1, new Color (127, 255, 212));
-				colors.put(2, new Color (255, 127, 80));
-				colors.put(3, new Color (100, 149, 237));
-				colors.put(4, new Color (153, 50, 204));
-				colors.put(5, new Color (233, 150, 122));
-				colors.put(6, new Color (143, 188, 143));
-				colors.put(7, new Color (255, 215, 0));
-				colors.put(8, new Color (173, 255, 47));
-				colors.put(9, new Color (205, 92, 92));
-				colors.put(10, new Color (240, 230, 140));
-				colors.put(11, new Color (173, 216, 230));
-				colors.put(12, new Color (144, 238, 144));
-				colors.put(13, new Color (255, 182, 193));
-				colors.put(14, new Color (255, 160, 122));
-				colors.put(15, new Color (255, 222, 173));
-				colors.put(16, new Color (255, 239, 213));
-				colors.put(17, new Color (250, 128, 114));
-				colors.put(18, new Color (216, 191, 216));
-			
-			return colors.get((int) (Math.random() * colors.size()));
-		}
-		
-	// Funkcja przyciemnia lub objaœnia dany kolor o daną wartość
-		private static Color setColor (Color color, int value) {
-			int red, green, blue;
-			
-			red = color.getRed() + value;
-			green = color.getGreen() + value;
-			blue = color.getBlue() + value;
-				
-			red = red > 255 ? 255 : red;
-			green = green > 255 ? 255 : green;
-			blue = blue > 255 ? 255 : blue;
-			
-			red = red < 0 ? 0 : red;
-			green = green < 0 ? 0 : green;
-			blue = blue < 0 ? 0 : blue;
-			
-			return new Color (red, green, blue);
-		}
+	}	
 	
 	public void nextLine() {
 		number++;

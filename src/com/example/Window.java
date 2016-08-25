@@ -83,10 +83,6 @@ public class Window extends JFrame {
 						}
 						catch (NumberFormatException exception) {
 							// Komunikat o b³êdzie - pogrubienie i zmiana koloru tekstu
-								Font normal = label.getFont();
-								Font error = new Font(normal.getName(), Font.BOLD, normal.getSize());
-								label.setForeground(Color.RED);
-								label.setFont(error);
 								labelText = "Niew³aœciwy format danych";
 						}
 						label.setText(labelText);
