@@ -10,7 +10,7 @@ public class Calculations  {
 				
 		M += S / 60;
 		
-		return "DM = " + D + "*   " + M + "'";
+		return D + "*   " + M + "'";
 	}
 	
 	public String dmToDms(String degrees, String minutes) throws NumberFormatException {
@@ -20,6 +20,6 @@ public class Calculations  {
 		
 		float S = (M - (int) M) * 60;
 		
-		return "DMS = " + D + "*   " + (int) M + "'   " + S + "\"";
+		return D + "*   " + (int) M + "'   " + S + "\"";
 	}
 }

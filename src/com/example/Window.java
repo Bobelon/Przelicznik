@@ -31,10 +31,10 @@ public class Window extends JFrame {
 		private JTextField dmsDegrees;	
 		private JTextField dmsMinutes;	
 		private JTextField dmsSeconds;			
+		private JTextField label;
 		private JLabel dmsDegreeCharacter;	
 		private JLabel dmsMinutesCharacter;
-		private JLabel dmsSecondsCharacter;			
-		private JLabel label;
+		private JLabel dmsSecondsCharacter;	
 			private String labelText = "Wynik";			
 		private JButton countButton;
 
@@ -113,8 +113,8 @@ public class Window extends JFrame {
 			
 		// Dodanie listy
 			list = addField.createJComboBox();
-				list.addItem("DMS (stopnie : minuty : sekundy)");
-				list.addItem("DM (stopnie : minuty)");
+				list.addItem("stopnie : minuty : sekundy");
+				list.addItem("stopnie : minuty");
 			list.addActionListener(listActionListener);
 			add(list);
 			
@@ -141,7 +141,9 @@ public class Window extends JFrame {
 			}
 			
 		// Dodanie pola wyœwietlaj¹cego wynik
-			label = addField.createJLabel(labelText);
+			label = addField.createJTextField();
+			label.setText(labelText);
+			label.setEditable(false);
 			add(label);
 			
 		// Dodanie przycisku przeliczania

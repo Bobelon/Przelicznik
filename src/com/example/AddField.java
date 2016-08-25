@@ -171,6 +171,8 @@ public class AddField {
 				
 		textField.setBounds(x, y, width, height);
 		textField.setFont(font);
+		textField.setBackground(backgroundColor);
+		textField.setBorder(null);
 				
 		// Przejście do następnej linii
 			number++;
